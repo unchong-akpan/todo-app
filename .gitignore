@@ -1,0 +1,12 @@
+node_modules/
+.env
+logs/
+.DS_Store
+*.log
+.vscode/
+.idea/
+dist/
+coverage/
+SETUP.md
+QUICKSTART.md
+ER_DIAGRAM.md

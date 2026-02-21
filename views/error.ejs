@@ -1,0 +1,29 @@
+<div class="error-container">
+  <div class="error-card">
+    <h2><%= status %> - <%= message %></h2>
+    
+    <% if (locals.details) { %>
+      <div class="error-details">
+        <% if (Array.isArray(details)) { %>
+          <ul>
+            <% details.forEach(detail => { %>
+              <li><%= detail.msg || detail %></li>
+            <% }); %>
+          </ul>
+        <% } else { %>
+          <pre><%= details %></pre>
+        <% } %>
+      </div>
+    <% } %>
+
+    <div class="error-actions">
+      <% if (status === 404) { %>
+        <a href="/tasks" class="btn btn-primary">Go to Tasks</a>
+      <% } else if (status === 403) { %>
+        <a href="/tasks" class="btn btn-primary">Go to Tasks</a>
+      <% } else { %>
+        <a href="/" class="btn btn-primary">Go Home</a>
+      <% } %>
+    </div>
+  </div>
+</div>

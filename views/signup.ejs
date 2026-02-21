@@ -1,0 +1,61 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>Sign Up</h2>
+    
+    <% if (locals.error) { %>
+      <div class="alert alert-error">
+        <%= error %>
+      </div>
+    <% } %>
+
+    <% if (locals.success) { %>
+      <div class="alert alert-success">
+        <%= success %>
+      </div>
+    <% } %>
+
+    <form method="POST" action="/signup" class="form">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input 
+          type="text" 
+          id="username" 
+          name="username" 
+          required 
+          placeholder="Choose a username (3-20 alphanumeric)"
+          minlength="3"
+          maxlength="20"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          required 
+          placeholder="At least 6 characters"
+          minlength="6"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input 
+          type="password" 
+          id="confirmPassword" 
+          name="confirmPassword" 
+          required 
+          placeholder="Confirm your password"
+        >
+      </div>
+
+      <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+
+    <p class="auth-link">
+      Already have an account? <a href="/login">Login here</a>
+    </p>
+  </div>
+</div>

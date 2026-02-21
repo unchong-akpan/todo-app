@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> - Todo App</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-brand">
+        <h1>📝 Todo App</h1>
+      </div>
+      <% if (typeof username !== 'undefined' && username) { %>
+        <div class="navbar-user">
+          <span>Welcome, <strong><%= username %></strong></span>
+          <a href="/logout" class="logout-btn">Logout</a>
+        </div>
+      <% } %>
+    </div>
+  </header>
+
+  <main class="container">
+    <%- body %>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 Todo App. All rights reserved.</p>
+  </footer>
+</body>
+</html>

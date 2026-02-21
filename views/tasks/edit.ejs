@@ -1,0 +1,51 @@
+<div class="edit-task-container">
+  <div class="edit-task-card">
+    <h2>Edit Task</h2>
+
+    <form method="POST" action="/tasks/<%= task.id %>/edit" class="form">
+      <div class="form-group">
+        <label for="title">Task Title *</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          required
+          placeholder="What needs to be done?"
+          maxlength="255"
+          value="<%= task.title %>"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          name="description"
+          placeholder="Add more details about this task..."
+          maxlength="1000"
+          rows="6"
+        >
+<%= task.description || '' %></textarea
+        >
+      </div>
+
+      <div class="task-status-info">
+        <p>
+          <strong>Status:</strong>
+          <span class="status-badge <%= task.status %>"
+            ><%= task.status %></span
+          >
+        </p>
+        <p>
+          <strong>Created:</strong> <%= new
+          Date(task.createdAt).toLocaleString() %>
+        </p>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Update Task</button>
+        <a href="/tasks" class="btn btn-secondary">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>

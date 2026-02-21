@@ -1,0 +1,37 @@
+<div class="create-task-container">
+  <div class="create-task-card">
+    <h2>Create New Task</h2>
+
+    <form method="POST" action="/tasks" class="form">
+      <div class="form-group">
+        <label for="title">Task Title *</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          required
+          placeholder="What needs to be done?"
+          maxlength="255"
+        />
+        <small>Required field</small>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          name="description"
+          placeholder="Add more details about this task..."
+          maxlength="1000"
+          rows="6"
+        ></textarea>
+        <small>Optional field (max 1000 characters)</small>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Create Task</button>
+        <a href="/tasks" class="btn btn-secondary">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
