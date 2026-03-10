@@ -55,18 +55,19 @@ exports.getTasks = async (req, res) => {
 // Create task
 exports.createTask = async (req, res) => {
   try {
-    const { title, description } = req.body;
+    const { title, description, category } = req.body;
     const userId = req.session.userId;
 
     const task = new Task({
       title: title.trim(),
       description: description ? description.trim() : null,
+      category: category || 'Other',
       userId
     });
 
     await task.save();
     logger.info(`Task created: "${title}" (ID: ${task._id}) by user ${userId}`);
-    res.redirect('/tasks?filter=pending');
+    res.redirect('/tasks?filter=pending&toast=created');
   } catch (error) {
     logger.error('Error creating task:', error);
     res.status(500).render('error', {
@@ -192,7 +193,7 @@ exports.renderEditPage = async (req, res) => {
 exports.updateTask = async (req, res) => {
   try {
     const { taskId } = req.params;
-    const { title, description } = req.body;
+    const { title, description, category } = req.body;
     const userId = req.session.userId;
 
     const task = await Task.findById(taskId);
@@ -208,11 +209,13 @@ exports.updateTask = async (req, res) => {
 
     await Task.findByIdAndUpdate(taskId, {
       title: title.trim(),
-      description: description ? description.trim() : null
+      description: description ? description.trim() : null,
+      category: category || 'Other'
     });
 
     logger.info(`Task ${taskId} content updated by user ${userId}`);
-    res.redirect('/tasks');
+    // Use session or pass query parameter to indicate update success for toast
+    res.redirect('/tasks?toast=updated');
   } catch (error) {
     logger.error('Error updating task:', error);
     res.status(500).render('error', {

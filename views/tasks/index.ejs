@@ -41,7 +41,10 @@
                   ✗ <%= task.title %>
                 <% } %>
               </h3>
-              <span class="task-status <%= task.status %>"><%= task.status %></span>
+              <div class="task-badges">
+                <span class="task-category cat-<%= task.category ? task.category.toLowerCase() : 'other' %>"><%= task.category || 'Other' %></span>
+                <span class="task-status <%= task.status %>"><%= task.status %></span>
+              </div>
             </div>
             <% if (task.description) { %>
               <p class="task-description"><%= task.description %></p>
@@ -106,5 +109,38 @@ function deleteTask(taskId) {
       alert('Error deleting task');
     });
   }
+}
+
+// Toast Notification Logic
+document.addEventListener('DOMContentLoaded', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const toastEvent = urlParams.get('toast');
+  
+  if (toastEvent) {
+    showToast(toastEvent === 'created' ? 'Task created successfully!' : 'Task updated successfully!');
+    // Clean up URL
+    window.history.replaceState({}, document.title, window.location.pathname + (urlParams.get('filter') ? `?filter=${urlParams.get('filter')}` : ''));
+  }
+});
+
+function showToast(message) {
+  const toast = document.createElement('div');
+  toast.className = 'toast-notification success';
+  toast.innerHTML = `
+    <div class="toast-content">
+      <span class="toast-icon">✨</span>
+      <span class="toast-message">${message}</span>
+    </div>
+  `;
+  document.body.appendChild(toast);
+  
+  // Trigger animation
+  setTimeout(() => toast.classList.add('show'), 100);
+  
+  // Remove toast
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 400);
+  }, 3500);
 }
 </script>

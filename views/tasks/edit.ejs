@@ -25,8 +25,18 @@
           maxlength="1000"
           rows="6"
         >
-<%= task.description || '' %></textarea
-        >
+<%= task.description || '' %></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select id="category" name="category">
+          <option value="Work" <%= task.category === 'Work' ? 'selected' : '' %>>Work</option>
+          <option value="Personal" <%= task.category === 'Personal' ? 'selected' : '' %>>Personal</option>
+          <option value="Urgent" <%= task.category === 'Urgent' ? 'selected' : '' %>>Urgent</option>
+          <option value="Health" <%= task.category === 'Health' ? 'selected' : '' %>>Health</option>
+          <option value="Other" <%= (!task.category || task.category === 'Other') ? 'selected' : '' %>>Other</option>
+        </select>
       </div>
 
       <div class="task-status-info">

@@ -18,6 +18,11 @@ const taskSchema = new mongoose.Schema(
       enum: ['pending', 'completed', 'deleted'],
       default: 'pending'
     },
+    category: {
+      type: String,
+      enum: ['Work', 'Personal', 'Urgent', 'Health', 'Other'],
+      default: 'Other'
+    },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,

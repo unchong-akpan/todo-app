@@ -36,7 +36,11 @@ const taskValidation = [
     .trim()
     .isLength({ max: 1000 })
     .withMessage('Description must not exceed 1000 characters')
-    .optional({ checkFalsy: true })
+    .optional({ checkFalsy: true }),
+  body('category')
+    .optional()
+    .isIn(['Work', 'Personal', 'Urgent', 'Health', 'Other'])
+    .withMessage('Invalid category')
 ];
 
 // Middleware to handle validation results
