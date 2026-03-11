@@ -21,10 +21,12 @@ exports.signup = async (req, res) => {
     await user.save();
     logger.info(`New user created: ${username} (ID: ${user._id})`);
 
-    res.render('signup', {
-      title: 'Sign Up',
-      success: 'User registered successfully! Please login.'
-    });
+    // Log the user in automatically
+    req.session.userId = user._id.toString();
+    req.session.username = user.username;
+    logger.info(`User '${username}' logged in successfully upon signup`);
+
+    res.redirect('/tasks');
   } catch (error) {
     logger.error('Signup error:', error);
     res.status(500).render('signup', {
